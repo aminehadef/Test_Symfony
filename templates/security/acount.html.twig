@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Connexion</a>
+        {% endif %}
+        
+        <h2>Inscription</h2>
+        {{ form_start(form_registration)}}
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form_registration.email, { 'attr' : { 'placeholder' : 'mail' }} )}}
+                </div>
+                <div class="col">
+                    {{ form_row(form_registration.username, { 'attr' : { 'placeholder' : "nom d'utilisateur" }} ) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form_registration.password, { 'attr' : { 'placeholder' : 'mot de passe' }} ) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form_registration.confirm_password, { 'attr' : { 'placeholder' : 'confirmer mot de passe' }} ) }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Inscription</button>
+        {{ form_end(form_registration)}}
+{% endblock %}

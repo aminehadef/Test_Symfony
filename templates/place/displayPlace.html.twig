@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Place List{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Connexion</a>
+        {% endif %}
+        {{form_start(form)}}
+            {{form_row(form.file_scv)}}
+            <button type="submit" class="btn btn-primary">add</button>
+        {{form_end(form)}}
+        <h2>Place List</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">name</th>
+                    <th scope="col">address</th>
+                    <th scope="col">zipCode</th>
+                    <th scope="col">city</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for place in places %}
+                    <tr>
+                        <th scope="row">{{ place.id }}</th>
+                        <td>{{ place.name }}</td>
+                        <td>{{ place.address }}</td>
+                        <td>{{ place.zipCode }}</td>
+                        <td>{{ place.city }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

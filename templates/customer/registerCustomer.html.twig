@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Customer{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Connexion</a>
+        {% endif %}
+        
+        <h2>New Customer</h2>
+        {{ form_start(form_customer)}}
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form_customer.firstName, { 'attr' : { 'placeholder' : 'Nom' }} )}}
+                </div>
+                <div class="col">
+                    {{ form_row(form_customer.lastName, { 'attr' : { 'placeholder' : "Prenom" }} ) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form_customer.birthDate, { 'attr' : { 'placeholder' : 'date de naissance' }} ) }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Inscription</button>
+        {{ form_end(form_customer)}}
+    </div>
+{% endblock %}

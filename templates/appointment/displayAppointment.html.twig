@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Appointment{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Connexion</a>
+        {% endif %}
+        
+        <h2>List Appointment</h2>
+        <a href="{{ path('appointment_register') }}">New Appointment</a>
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">user</th>
+                    <th scope="col">customer</th>
+                    <th scope="col">place</th>
+                    <th scope="col">date</th>
+                    <th scope="col">action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                    <tr>
+                        <th scope="row">{{ appointment.id }}</th>
+                        <td>{{ appointment.user.username }}</td>
+                        <td>{{ appointment.customer.firstName }}</td>
+                        <td>{{ appointment.place.address }}</td>
+                        <td>{{ appointment.date|date("m/d/Y") }}</td>
+                        <td>
+                            <a href="{{ path('appointment_drop', { id:appointment.id }) }}">Drop</a>|<a href="{{ path('appointment_edit', { id:appointment.id }) }}">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+        
+    </div>
+{% endblock %}
